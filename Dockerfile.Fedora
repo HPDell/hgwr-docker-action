@@ -1,0 +1,22 @@
+FROM fedora:34
+
+COPY entrypoint.sh /entrypoint.sh
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+
+RUN dnf install -y \
+    R-core-devel \
+    cmake \
+    boost-devel \
+    armadillo-devel \
+    gsl-devel \
+    blas-devel \
+    lapack-devel \
+    openssl-devel \
+    libcurl-devel \
+    libgit2-devel
+RUN echo 'options("repos" = c(CRAN="https://cloud.r-project.org/"))' >> ~/.Rprofile
+RUN Rscript -e "install.packages(c('devtools', 'Rcpp', 'RcppArmadillo'), Ncpus = parallel::detectCores(), quiet = T)"
+
+ENTRYPOINT [ "/entrypoint.sh" ]
