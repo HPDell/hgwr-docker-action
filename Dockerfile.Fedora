@@ -1,4 +1,4 @@
-FROM fedora:34
+FROM fedora:36
 
 COPY entrypoint.sh /entrypoint.sh
 
@@ -15,8 +15,15 @@ RUN dnf install -y \
     lapack-devel \
     openssl-devel \
     libcurl-devel \
-    libgit2-devel
+    libgit2-devel \
+    udunits2-devel \
+    geos-devel \
+    gdal-devel \
+    proj-devel \
+    sqlite-devel \
+    R-devtools \
+    R-Rcpp-devel
 RUN echo 'options("repos" = c(CRAN="https://cloud.r-project.org/"))' >> ~/.Rprofile
-RUN Rscript -e "install.packages(c('devtools', 'Rcpp', 'RcppArmadillo'), Ncpus = parallel::detectCores(), quiet = T)"
+RUN Rscript -e "install.packages(c('RcppArmadillo', 'sf'), Ncpus = parallel::detectCores(), quiet = T)"
 
 ENTRYPOINT [ "/entrypoint.sh" ]

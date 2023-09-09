@@ -1,4 +1,4 @@
-FROM debian:10
+FROM debian:12
 
 COPY entrypoint.sh /entrypoint.sh
 
@@ -12,16 +12,7 @@ RUN apt-get -qq update && \
     gfortran \
     devscripts \
     wget \
-    cmake
-RUN mkdir armadillo && \
-    wget -qO- http://sourceforge.net/projects/arma/files/armadillo-9.900.6.tar.xz | \
-    tar -Jxf- --directory=armadillo --strip-components=1 && \
-    cmake -B armadillo/build -S armadillo -DCMAKE_INSTALL_PREFIX=/usr/local -DDETECT_HDF5=OFF -DBUILD_SHARED_LIBS=OFF && \
-    cd armadillo/build && make && make install && cd ../..
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7'
-RUN echo "deb http://cloud.r-project.org/bin/linux/debian buster-cran40/" >> /etc/apt/sources.list
-RUN apt-get -qq update && \
-    apt-get -qq install -y \
+    cmake \
     r-base r-base-dev \
     libgsl-dev \
     libboost-dev \
@@ -31,7 +22,11 @@ RUN apt-get -qq update && \
     libxml2-dev \
     libssl-dev \
     libblas-dev \
-    liblapack-dev
-RUN Rscript -e "install.packages(c('devtools', 'Rcpp', 'RcppArmadillo'), Ncpus = parallel::detectCores(), quiet = T)"
+    liblapack-dev \
+    libarmadillo-dev \
+    r-cran-devtools \
+    r-cran-rcpp \
+    r-cran-rcpparmadillo \
+    r-cran-sf
 
 ENTRYPOINT [ "/entrypoint.sh" ]

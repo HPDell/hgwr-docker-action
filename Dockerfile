@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 COPY entrypoint.sh /entrypoint.sh
 
@@ -14,12 +14,6 @@ RUN apt-get -qq update && \
     cmake \
     software-properties-common \
     dirmngr
-RUN mkdir armadillo && \
-    wget -qO- http://sourceforge.net/projects/arma/files/armadillo-9.900.6.tar.xz | \
-    tar -Jxf- --directory=armadillo --strip-components=1 && \
-    cmake -B armadillo/build -S armadillo -DCMAKE_INSTALL_PREFIX=/usr/local -DDETECT_HDF5=OFF -DBUILD_SHARED_LIBS=OFF . && \
-    cmake --build armadillo/build --config Release && \
-    cmake --install armadillo/build
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
 RUN apt-get -qq install --no-install-recommends \
@@ -32,7 +26,11 @@ RUN apt-get -qq install --no-install-recommends \
     libxml2-dev \
     libssl-dev \
     libblas-dev \
-    liblapack-dev
-RUN Rscript -e "install.packages(c('devtools', 'Rcpp', 'RcppArmadillo'), Ncpus = parallel::detectCores(), quiet = T)"
+    liblapack-dev \
+    libarmadillo-dev \
+    r-cran-devtools \
+    r-cran-rcpp \
+    r-cran-rcpparmadillo \
+    r-cran-sf
 
 ENTRYPOINT [ "/entrypoint.sh" ]
