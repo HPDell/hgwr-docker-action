@@ -25,6 +25,6 @@ RUN dnf install -y \
     R-devtools \
     R-Rcpp-devel
 RUN echo 'options("repos" = c(CRAN="https://cloud.r-project.org/"))' >> ~/.Rprofile
-RUN Rscript -e "install.packages(c('RcppArmadillo', 'sf'), Ncpus = parallel::detectCores(), quiet = T)"
+RUN Rscript -e "install.packages(c('RcppArmadillo', 'tidyverse', 'sf', 'tmap', 'spdep', 'lme4', 'GWmodel'), Ncpus = parallel::detectCores(), quiet = T)"
 
 ENTRYPOINT [ "/entrypoint.sh" ]

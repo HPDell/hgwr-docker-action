@@ -31,6 +31,11 @@ RUN apt-get -qq install --no-install-recommends \
     r-cran-devtools \
     r-cran-rcpp \
     r-cran-rcpparmadillo \
-    r-cran-sf
+    r-cran-tidyverse \
+    r-cran-sf \
+    r-cran-spdep \
+    r-cran-tmap
+
+RUN Rscript -e "install.packages(c('lme4', 'GWmodel'), Ncpus = parallel::detectCores(), quiet = T)"
 
 ENTRYPOINT [ "/entrypoint.sh" ]
