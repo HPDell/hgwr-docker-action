@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 COPY entrypoint.sh /entrypoint.sh
 
@@ -23,6 +23,10 @@ RUN apt-get -qq update && \
     libssl-dev \
     libblas-dev \
     liblapack-dev \
-    libarmadillo-dev
+    libarmadillo-dev \
+    r-base \
+    r-cran-tidyverse \
+    r-cran-devtools \
+    r-cran-sf
 
 ENTRYPOINT [ "/entrypoint.sh" ]

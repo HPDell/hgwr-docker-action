@@ -22,6 +22,10 @@ RUN apt-get -qq update && \
     libssl-dev \
     libblas-dev \
     liblapack-dev \
-    libarmadillo-dev
+    libarmadillo-dev \
+    r-base \
+    r-cran-tidyverse \
+    r-cran-devtools \
+    r-cran-sf
 
 ENTRYPOINT [ "/entrypoint.sh" ]

@@ -20,6 +20,9 @@ RUN dnf install -y \
     geos-devel \
     gdal-devel \
     proj-devel \
-    sqlite-devel
+    sqlite-devel \
+    R-core-devel \
+    R-devtools \
+    R-Rcpp-devel
 
 ENTRYPOINT [ "/entrypoint.sh" ]
