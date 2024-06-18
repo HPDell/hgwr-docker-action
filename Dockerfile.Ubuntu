@@ -13,11 +13,7 @@ RUN apt-get -qq update && \
     wget \
     cmake \
     software-properties-common \
-    dirmngr
-RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
-RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
-RUN apt-get -qq install --no-install-recommends \
-    r-base \
+    dirmngr \
     libgsl-dev \
     libboost-dev \
     libboost-program-options-dev \
@@ -27,15 +23,6 @@ RUN apt-get -qq install --no-install-recommends \
     libssl-dev \
     libblas-dev \
     liblapack-dev \
-    libarmadillo-dev \
-    r-cran-devtools \
-    r-cran-rcpp \
-    r-cran-rcpparmadillo \
-    r-cran-tidyverse \
-    r-cran-sf \
-    r-cran-spdep \
-    r-cran-tmap
-
-RUN Rscript -e "install.packages(c('lme4', 'GWmodel'), Ncpus = parallel::detectCores(), quiet = T)"
+    libarmadillo-dev
 
 ENTRYPOINT [ "/entrypoint.sh" ]

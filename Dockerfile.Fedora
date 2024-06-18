@@ -6,7 +6,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
 
 RUN dnf install -y \
-    R-core-devel \
     git \
     cmake \
     boost-devel \
@@ -21,10 +20,6 @@ RUN dnf install -y \
     geos-devel \
     gdal-devel \
     proj-devel \
-    sqlite-devel \
-    R-devtools \
-    R-Rcpp-devel
-RUN echo 'options("repos" = c(CRAN="https://cloud.r-project.org/"))' >> ~/.Rprofile
-RUN Rscript -e "install.packages(c('RcppArmadillo', 'tidyverse', 'sf', 'tmap', 'spdep', 'lme4', 'GWmodel'), Ncpus = parallel::detectCores(), quiet = T)"
+    sqlite-devel
 
 ENTRYPOINT [ "/entrypoint.sh" ]
