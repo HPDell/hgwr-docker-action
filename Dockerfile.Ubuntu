@@ -24,6 +24,7 @@ RUN apt-get -qq update && \
     libblas-dev \
     liblapack-dev \
     libarmadillo-dev \
+    catch2 \
     r-base \
     r-cran-tidyverse \
     r-cran-devtools \
