@@ -25,4 +25,7 @@ RUN dnf install -y \
     R-devtools \
     R-Rcpp-devel
 
+RUN Rscript -e 'chooseCRANmirror(ind=1); install.packages("pak")'
+RUN Rscript -e 'pak::pkg_install(c("tidyverse", "sf", "tmap", "spdep", "GWmodel", "lme4", "Rcpp", "RcppArmadillo"))'
+
 ENTRYPOINT [ "/entrypoint.sh" ]

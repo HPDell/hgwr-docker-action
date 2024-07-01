@@ -27,6 +27,14 @@ RUN apt-get -qq update && \
     r-base \
     r-cran-tidyverse \
     r-cran-devtools \
-    r-cran-sf
+    r-cran-sf \
+    r-cran-rcpp \
+    r-cran-rcpparmadillo \
+    r-cran-lme4 \
+    r-cran-spdep
+
+RUN Rscript -e 'chooseCRANmirror(ind=1); install.packages("pak")'
+RUN Rscript -e 'pak::pkg_install(c("tmap", "GWmodel"))'
+
 
 ENTRYPOINT [ "/entrypoint.sh" ]
