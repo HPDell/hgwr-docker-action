@@ -1,5 +1,0 @@
-name: 'Check R Package hgwrr on Ubuntu'
-description: 'Build the R checking environment for hgwrr package and check it.'
-runs:
-  using: 'docker'
-  image: 'docker://ghcr.io/hpdell/hgwr-ubuntu-docker-action:latest'
