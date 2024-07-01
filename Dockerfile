@@ -7,6 +7,7 @@ ENV TZ=Etc/UTC
 
 RUN apt-get -qq update && \
     apt-get -qq install --no-install-recommends \
+    sudo \
     build-essential \
     gfortran \
     devscripts \

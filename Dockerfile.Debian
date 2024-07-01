@@ -7,6 +7,7 @@ ENV TZ=Etc/UTC
 
 RUN apt-get -qq update && \
     apt-get -qq install -y \
+    sudo \
     gnupg \
     build-essential \
     gfortran \
