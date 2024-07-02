@@ -21,11 +21,9 @@ RUN dnf install -y \
     gdal-devel \
     proj-devel \
     sqlite-devel \
-    R-core-devel \
-    R-devtools \
-    R-Rcpp-devel
+    R-core-devel
 
 RUN Rscript -e 'chooseCRANmirror(ind=1); install.packages("pak")'
-RUN Rscript -e 'pak::pkg_install(c("tidyverse", "sf", "tmap", "spdep", "GWmodel", "lme4", "Rcpp", "RcppArmadillo"))'
+RUN Rscript -e 'pak::pkg_install(c("devtools", "tidyverse", "sf", "tmap", "spdep", "GWmodel", "lme4", "Rcpp", "RcppArmadillo"))'
 
 ENTRYPOINT [ "/entrypoint.sh" ]
